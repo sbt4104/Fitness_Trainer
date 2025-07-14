@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Health Metrics Calculator</h1>
+            <p>Professional health assessment with detailed insights</p>
+        </div>
+
+        <div class="card">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="switchTab('personal')">Personal Information</button>
+                <button class="nav-tab" onclick="switchTab('metrics')">Health Metrics</button>
+                <button class="nav-tab" onclick="switchTab('results')">Results & Analysis</button>
+            </div>
+
+            <!-- Personal Information Tab -->
+            <div id="personal-tab" class="tab-content active">
+                <div class="step-indicator">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Personal Info</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Health Metrics</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Results</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Personal Information</h2>
+                
+                <div class="form-section">
+                    <div class="form-section-title">Basic Information</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                Full Name (Optional)
+                                <div class="label-help">Your name will appear on the report</div>
+                            </label>
+                            <input type="text" id="fullName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Age (years)
+                                <div class="label-help">Your current age in years</div>
+                            </label>
+                            <input type="number" id="age" min="18" max="100" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            Gender
+                            <div class="label-help">Select your biological gender for accurate calculations</div>
+                        </label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <div></div>
+                    <button class="btn" onclick="nextStep()">Next: Health Metrics →</button>
+                </div>
+            </div>
+
+            <!-- Health Metrics Tab -->
+            <div id="metrics-tab" class="tab-content">
+                <div class="step-indicator">
+                    <div class="step completed">
+                        <div class="step-number">✓</div>
+                        <div class="step-text">Personal Info</div>
+                    </div>
+                    <div class="step active">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Health Metrics</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Results</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Health Metrics & Measurements</h2>
+                
+                <div class="form-section">
+                    <div class="form-section-title">Physical Measurements</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                Height
+                                <div class="label-help">Enter your height in feet and inches</div>
+                            </label>
+                            <div class="height-inputs">
+                                <div>
+                                    <input type="number" id="heightFeet" min="4" max="7" placeholder="Feet" required>
+                                    <div style="text-align: center; font-size: 12px; color: #6b7280; margin-top: 4px;">Feet</div>
+                                </div>
+                                <div>
+                                    <input type="number" id="heightInches" min="0" max="11" placeholder="Inches" required>
+                                    <div style="text-align: center; font-size: 12px; color: #6b7280; margin-top: 4px;">Inches</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Current Weight (lbs)
+                                <div class="label-help">Your current body weight in pounds</div>
+                            </label>
+                            <input type="number" id="weight" step="0.1" min="80" max="400" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">Activity & Lifestyle</div>
+                    <div class="form-group">
+                        <label>
+                            Activity Level
+                            <div class="label-help">Choose based on your daily activity and exercise routine</div>
+                        </label>
+                        <select id="activityLevel" required>
+                            <option value="">Select Activity Level</option>
+                            <option value="1.1">Sedentary (desk job, no exercise)</option>
+                            <option value="1.2">Lightly Active (light exercise 1-3 days/week)</option>
+                            <option value="1.3">Moderately Active (moderate exercise 3-5 days/week)</option>
+                            <option value="1.4">Very Active (hard exercise 6-7 days/week)</option>
+                            <option value="1.5">Extremely Active (physical job + exercise)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            Current Body Fat % (Optional)
+                            <div class="label-help">If known from DEXA scan or InBody analysis</div>
+                        </label>
+                        <input type="number" id="bodyFat" step="0.1" min="5" max="50" placeholder="Leave blank if unknown">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            Resting Heart Rate (Optional)
+                            <div class="label-help">Beats per minute when at rest</div>
+                        </label>
+                        <input type="number" id="restingHR" min="40" max="100" placeholder="e.g., 65">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">Goals & Timeline</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Primary Goal</label>
+                            <select id="primaryGoal" required>
+                                <option value="">Select Primary Goal</option>
+                                <option value="weight-loss">Weight Loss</option>
+                                <option value="muscle-gain">Muscle Gain</option>
+                                <option value="body-recomp">Body Recomposition</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Timeline Preference</label>
+                            <select id="timelinePreference">
+                                <option value="3">3 Months (Aggressive)</option>
+                                <option value="6" selected>6 Months (Balanced)</option>
+                                <option value="12">12 Months (Sustainable)</option>
+                                <option value="custom">Custom Timeline</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>Goal Weight (lbs)</label>
+                            <input type="number" id="goalWeight" step="0.1" min="80" max="400" placeholder="Target weight">
+                        </div>
+                        <div class="form-group">
+                            <label>Goal Body Fat %</label>
+                            <input type="number" id="goalBodyFat" step="0.1" min="5" max="50" placeholder="Target body fat">
+                        </div>
+                        <div class="form-group">
+                            <label>Custom Timeline (months)</label>
+                            <input type="number" id="customTimeline" min="1" max="24" placeholder="Enter months" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">Approach Strategy</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                Sustainable Deficit (calories/day)
+                                <div class="label-help">Conservative, long-term approach</div>
+                            </label>
+                            <input type="number" id="sustainableDeficit" value="300" min="200" max="500" step="50">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Aggressive Deficit (calories/day)
+                                <div class="label-help">Faster results, requires discipline</div>
+                            </label>
+                            <input type="number" id="aggressiveDeficit" value="500" min="400" max="800" step="50">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            Workout Frequency Options
+                            <div class="label-help">Check all frequencies to analyze</div>
+                        </label>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 8px;">
+                            <label style="display: flex; align-items: center; font-size: 14px; margin-bottom: 0;">
+                                <input type="checkbox" id="workout2x" value="2" style="width: auto; margin-right: 8px;" checked>
+                                2x per week
+                            </label>
+                            <label style="display: flex; align-items: center; font-size: 14px; margin-bottom: 0;">
+                                <input type="checkbox" id="workout3x" value="3" style="width: auto; margin-right: 8px;" checked>
+                                3x per week
+                            </label>
+                            <label style="display: flex; align-items: center; font-size: 14px; margin-bottom: 0;">
+                                <input type="checkbox" id="workout4x" value="4" style="width: auto; margin-right: 8px;" checked>
+                                4x per week
+                            </label>
+                            <label style="display: flex; align-items: center; font-size: 14px; margin-bottom: 0;">
+                                <input type="checkbox" id="workout5x" value="5" style="width: auto; margin-right: 8px;" checked>
+                                5x per week
+                            </label>
+                            <label style="display: flex; align-items: center; font-size: 14px; margin-bottom: 0;">
+                                <input type="checkbox" id="workout6x" value="6" style="width: auto; margin-right: 8px;">
+                                6x per week
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <button type="button" class="btn-secondary" onclick="generateScenarios()" style="width: 100%; padding: 12px;">Generate All Scenarios</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn-secondary" onclick="calculateIdealWeight()" style="width: 100%; padding: 12px;">Calculate Ideal Weight</button>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button class="btn-secondary" onclick="switchTab('personal')">← Back</button>
+                    <button class="btn" onclick="calculateResults()">Calculate Results →</button>
+                </div>
+            </div>
+
+            <!-- Results Tab -->
+            <div id="results-tab" class="tab-content">
+                <div class="step-indicator">
+                    <div class="step completed">
+                        <div class="step-number">✓</div>
+                        <div class="step-text">Personal Info</div>
+                    </div>
+                    <div class="step completed">
+                        <div class="step-number">✓</div>
+                        <div class="step-text">Health Metrics</div>
+                    </div>
+                    <div class="step active">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Results</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Health Assessment Report</h2>
+                
+                <div class="results-actions">
+                    <button class="btn" onclick="downloadReport()">📄 Download PDF</button>
+                    <button class="btn-secondary" onclick="printReport()">🖨️ Print Report</button>
+                    <button class="btn-secondary" onclick="shareReport()">📤 Share Results</button>
+                </div>
+
+                <div class="results-layout">
+                    <div class="results-main">
+                        <div id="results-container">
+                            <div style="text-align: center; color: #6b7280; font-style: italic; padding: 40px;">
+                                Complete the health metrics form to generate your personalized report.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <div class="guide-title">Understanding Your Results</div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-metric">Body Mass Index (BMI)</div>
+                            <div class="guide-explanation">
+                                Measures body fat based on height and weight. Normal: 18.5-24.9, Overweight: 25-29.9, Obese: 30+
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-metric">Resting Metabolic Rate (RMR)</div>
+                            <div class="guide-explanation">
+                                Calories your body burns at rest. Used to calculate daily caloric needs and weight management goals.
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-metric">Total Daily Calories</div>
+                            <div class="guide-explanation">
+                                Total calories needed including activity. Eat below this for weight loss, above for weight gain.
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-metric">Skeletal Muscle Mass</div>
+                            <div class="guide-explanation">
+                                Percentage of body weight that's muscle. Healthy ranges: Men 45-55%, Women 40-50%.
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-metric">Daily Protein Target</div>
+                            <div class="guide-explanation">
+                                Daily protein needed to maintain/build muscle. Based on skeletal muscle mass × 1.5g per pound.
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-metric">Heart Rate Training Zones</div>
+                            <div class="guide-explanation">
+                                Zone 1-2: Recovery/Endurance, Zone 3: Aerobic, Zone 4: Threshold, Zone 5: Power/Sprint training.
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-metric">BMI Weight Ranges</div>
+                            <div class="guide-explanation">
+                                Healthy: BMI 23-25, Athletic: BMI 25-29. Use "Calculate Ideal Weight" for personalized ranges.
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 12px; background: #fffbeb; border-radius: 6px; border: 1px solid #fde68a;">
+                            <div style="font-size: 13px; color: #92400e;">
+                                <strong>Disclaimer:</strong> These are estimates based on standard formulas. Consult healthcare professionals for personalized advice.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- testing if this is getting uploaded on github-->
